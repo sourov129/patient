@@ -10,10 +10,10 @@ auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc2MjUxNjY
 
 
 {
-  "patientName": "sdf",
-  "dateOfBirth": "2001-12-27",
+  "patientName": "Sujon",
+  "dateOfBirth": "2002-12-27",
   "patientGender": "Male",
-  "patientMobile": "01845132578",
+  "patientMobile": "01845124781",
   "presentAddress": "123, Elm Street",
   "permanentAddress": "456, Oak Avenue"
 }
