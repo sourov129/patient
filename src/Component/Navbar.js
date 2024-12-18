@@ -2,6 +2,7 @@ import React from "react";
 import {Link, useNavigate} from "react-router-dom";
 
 
+
 const Navbar = () => {
 
     let navigate = useNavigate();
@@ -29,8 +30,9 @@ const Navbar = () => {
                             </li>
 
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="/addpatient">Add Patient</a>
+                                <a className="nav-link active" aria-current="page" href="/adminhome">Admin Home</a>
                             </li>
+
 
 
                         </ul>
@@ -44,6 +46,10 @@ const Navbar = () => {
                     </div>
                 </div>
             </nav>
+
+
+
+
 
 
 

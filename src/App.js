@@ -14,6 +14,7 @@ import AdminHome from "./Component/AdminHome";
 import PatientStates from "./Context/PatientStates";
 import Home from "./Component/Home";
 import AddPatient from "./Component/AddPatient";
+import FetchInfo from "./Component/FetchInfo";
 
 function App() {
   return (
@@ -21,14 +22,17 @@ function App() {
       <PatientStates>
         <Router>
           <Navbar/>
-          <Routes>
-            <Route path="/home" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/adminhome" element={<AdminHome />} />
-            <Route path="/addpatient" element={<AddPatient />} />
+          <div className="container">
+            <Routes>
+              <Route path="/home" element={<Home/>}/>
+              <Route path="/login" element={<Login/>}/>
+              <Route path="/signup" element={<SignUp/>}/>
+              <Route path="/adminhome" element={<AdminHome/>}/>
+              <Route path="/addpatient" element={<AddPatient/>}/>
+              <Route path="/fetchinfo" element={<FetchInfo/>}/>
 
-          </Routes>
+            </Routes>
+          </div>
 
         </Router>
 

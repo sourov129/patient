@@ -35,8 +35,35 @@ const PatientStates = (props) => {
 
     };
 
+
+    //Add Patient for admin using
+    const addPatient = async (patientData) => {
+
+        try{
+            const response = await fetch(`${host}/api/patient/addpatient`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": localStorage.getItem('token'),
+                },
+                body: JSON.stringify(patientData),
+
+            });
+            const json = await response.json();
+            if (json.success) {
+                setPatients([...patients, json.patientsInfo.savedPatient]);
+            }
+
+
+        }catch (error) {
+            console.error("Error adding patient information:", error);
+        }
+
+
+    };
+
     return (
-        <PatientContext.Provider value={{ patients, getPatientInfo }}>
+        <PatientContext.Provider value={{ patients, getPatientInfo, addPatient }}>
             {props.children}
         </PatientContext.Provider>
     );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const Login = () => {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -72,10 +72,19 @@ const Login = () => {
                         />
                     </div>
 
-                    <button type="submit" className="btn btn-primary">
-                        Submit
-                    </button>
+                    <div className="text-center">
+                        <button type="submit" className="btn btn-primary">
+                            Login
+                        </button></div>
                 </form>
+
+                <h5 className="my-5">Don't have an account yet? Sign Up</h5>
+                <div className="text-center">
+
+                    <Link className="btn btn-primary  mx-2" to="/signup" role="button">Signup</Link>
+                </div>
+
+
             </div>
         </div>
     );
