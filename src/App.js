@@ -15,6 +15,7 @@ import PatientStates from "./Context/PatientStates";
 import Home from "./Component/Home";
 import AddPatient from "./Component/AddPatient";
 import FetchInfo from "./Component/FetchInfo";
+import UpdatePatient from "./Component/UpdatePatient";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               <Route path="/adminhome" element={<AdminHome/>}/>
               <Route path="/addpatient" element={<AddPatient/>}/>
               <Route path="/fetchinfo" element={<FetchInfo/>}/>
+              <Route path="/updatepatient" element={<UpdatePatient/>}/>
 
             </Routes>
           </div>

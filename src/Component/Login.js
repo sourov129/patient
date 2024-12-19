@@ -30,7 +30,7 @@ const Login = () => {
                 localStorage.setItem('token', json.authtoken);
 
                 // Navigate to the home page
-                navigate('/adminhome');
+                navigate('/addpatient');
             } else {
                 const errorMessage = await response.json();
                 setError(errorMessage.message || 'Invalid login credentials');

@@ -16,9 +16,6 @@ const fetchuser = require("../middleware/fetchuser");
 
 router.get("/fetchpatient", fetchuser,async (req, res) => {
 
-
-
-
     try{
 
 
@@ -97,36 +94,40 @@ router.post('/addpatient' ,fetchuser,[
 
 //Route 3: update Patient Info For admin uisng "/api/patient/updatepatient"
 
-router.put('/updatepatient/:id', fetchuser,[
+router.put('/updatepatient/:id', fetchuser,
+    [
 
-], async (req, res) => {
+        body('patientName').notEmpty().withMessage('Patient name is required'),
+        body('dateOfBirth').notEmpty().withMessage('Date of birth is required'),
+        body('patientGender').isIn(['Male', 'Female', 'Other']).withMessage('Gender must be Male, Female, or Other'),
+        body('patientMobile').matches(/^01[3-9]\d{8}$/).withMessage('Invalid mobile number').isLength({ min: 11, max: 11 }).withMessage('Mobile number must be 11 digits'),
+        body('presentAddress').notEmpty().withMessage('Present address is required'),
+        body('permanentAddress').notEmpty().withMessage('Permanent address is required')
+
+
+    ]
+    ,async (req, res) => {
     const { patientName, dateOfBirth, patientGender, patientMobile, presentAddress, permanentAddress } = req.body;
 
-    // Check if patient exists
-    const patient = await Patient.findById(req.params.id);
-    if (!patient) {
-        return res.status(404).json({ error: 'Patient not found' });
-    }
+        // Check for validation errors
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
 
-    try{
+    try {
+        const patient = await Patient.findById(req.params.id);
+        if (!patient) return res.status(404).json({ error: 'Patient not found' });
+
         const age = moment().diff(moment(dateOfBirth), 'years');
-
-        patient.patientName = patientName || patient.patientName;
-        patient.dateOfBirth = dateOfBirth || patient.dateOfBirth;
-        patient.patientAge = age;
-        patient.patientGender = patientGender || patient.patientGender;
-        patient.patientMobile = patientMobile || patient.patientMobile;
-        patient.presentAddress = presentAddress || patient.presentAddress;
-        patient.permanentAddress = permanentAddress || patient.permanentAddress;
-
+        Object.assign(patient, { patientName, dateOfBirth, patientAge: age, patientGender, patientMobile, presentAddress, permanentAddress });
         const updatedPatient = await patient.save();
         res.json({ success: true, updatedPatient });
-    }
-    catch(err){
-        console.log(err);
+    } catch (err) {
+        console.error(err);
         res.status(500).json({ errors: "Internal Server Error" });
     }
-})
+});
 
 
 //Delete Information fro admin  using "/api/patient/deletepatient"
